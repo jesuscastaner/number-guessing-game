@@ -8,6 +8,8 @@ public class Game {
     private final Random randomGenerator = new Random();
     private final Scanner scanner = new Scanner(System.in);
     private final String promptMarker = "> ";
+    private final Stopwatch stopwatch = new Stopwatch();
+
     private boolean wantsToPlay = true;
     private Difficulty difficulty = Difficulty.UNSELECTED;
 
@@ -94,6 +96,7 @@ public class Game {
         int winningNumber = randomGenerator.nextInt(100) + 1;
         int attemptsLeft = difficulty.getAttempts();
         int attemptsUsed = 0;
+        stopwatch.start();
 
         System.out.printf("""
                         Ok, I have already thought of a number between 1 and 100.
@@ -109,8 +112,13 @@ public class Game {
             attemptsUsed++;
 
             if (playerGuess == winningNumber) {
-                System.out.println("Congratulations! It was " + winningNumber +
-                        "! You guessed it in " + attemptsUsed + " attempts.");
+                System.out.printf("""
+                        Congratulations! It was %d! You guessed it in %d attempts,
+                        and it took you %s.
+                        """,
+                        winningNumber,
+                        attemptsUsed,
+                        stopwatch.getFormattedElapsedTime());
                 gameOver = true;
                 continue;
             } else if (playerGuess > winningNumber) {
