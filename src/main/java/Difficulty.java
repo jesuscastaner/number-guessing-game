@@ -2,7 +2,6 @@
  * Represents the difficulty level of the game.
  */
 public enum Difficulty {
-    UNSELECTED(0),
     EASY(8),
     MEDIUM(6),
     HARD(4);
